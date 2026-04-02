@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parul University - Attendance</title>
+    <!-- Modern Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #07070a;
+            --primary-glow: rgba(0, 240, 255, 0.45);
+            --secondary-glow: rgba(180, 0, 255, 0.45);
+            --glass-bg: rgba(20, 20, 28, 0.5);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #ffffff;
+            --text-muted: #8b8b9c;
+            --success: #00ff88;
+            --font-family: 'Outfit', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Ambient Orbs */
+        .background-orbs {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; pointer-events: none;
+        }
+        .orb {
+            position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.6;
+            animation: float 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .orb-1 { width: 450px; height: 450px; background: var(--primary-glow); top: -100px; left: -50px; }
+        .orb-2 { width: 550px; height: 550px; background: var(--secondary-glow); bottom: -150px; right: -100px; animation-duration: 25s; animation-direction: alternate-reverse; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(80px, 40px) scale(1.1); }
+            100% { transform: translate(-40px, 100px) scale(0.9); }
+        }
+
+        .container {
+            width: 100%; max-width: 1000px; padding: 40px 20px;
+            display: flex; flex-direction: column; gap: 30px; z-index: 10;
+        }
+
+        header { text-align: center; animation: scaleIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        
+        h1 {
+            font-size: 3rem; font-weight: 800; letter-spacing: 2px;
+            background: linear-gradient(90deg, #00f0ff, #b400ff, #00f0ff); background-size: 200% auto;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-transform: uppercase; animation: gradientMove 5s linear infinite;
+            margin-bottom: 5px; text-shadow: 0 0 30px rgba(180, 0, 255, 0.2);
+        }
+
+        p.subtitle { color: var(--text-muted); font-size: 1.25rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
+
+        @keyframes gradientMove { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+
+        /* Glass Panel */
+        .glass-panel {
+            background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); border-radius: 20px; padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255,255,255,0.02);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Controls */
+        .controls { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; align-items: center; }
+
+        .search-area { position: relative; flex: 1; min-width: 300px; }
+        .search-area i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 1.1rem; }
+        
+        .search-input {
+            width: 100%; border-radius: 12px; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 16px 16px 16px 50px; color: var(--text-main); font-size: 1.05rem; font-family: var(--font-family); transition: all 0.3s ease;
+        }
+        .search-input:focus { border-color: #00f0ff; box-shadow: 0 0 20px rgba(0, 240, 255, 0.15); outline: none; }
+        .search-input:focus ~ i { color: #00f0ff; }
+
+        button.btn-save {
+            padding: 16px 30px; background: linear-gradient(135deg, #00f0ff, #8a2be2);
+            border: none; border-radius: 12px; color: #fff; font-weight: 700; font-size: 1.05rem;
+            font-family: var(--font-family); cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3); display: flex; align-items: center; gap: 10px;
+        }
+        button.btn-save:hover { transform: translateY(-3px); box-shadow: 0 5px 25px rgba(0, 240, 255, 0.5); }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex; justify-content: space-between; padding: 12px 18px; margin-bottom: 15px;
+            background: rgba(0,0,0,0.25); border-radius: 12px; font-size: 1rem; color: var(--text-muted); border: 1px solid rgba(255,255,255,0.03);
+        }
+        .stat-item span { color: var(--text-main); font-weight: 600; margin-left: 8px; }
+        .stat-item.active-stat span { color: var(--success); }
+
+        /* Table Area */
+        table { width: 100%; border-collapse: separate; border-spacing: 0 10px; }
+        thead th { text-align: left; padding: 10px 18px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 0.9rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        
+        tbody tr {
+            background: rgba(255, 255, 255, 0.02); transition: all 0.2s ease; cursor: pointer;
+            position: relative; user-select: none;
+        }
+        
+        tbody tr::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+            background: rgba(255, 255, 255, 0.1); transition: all 0.3s ease;
+            border-top-left-radius: 12px; border-bottom-left-radius: 12px;
+        }
+
+        tbody tr:hover { background: rgba(255, 255, 255, 0.06); transform: scale(1.01); }
+        
+        tbody tr.active-row::before {
+            background: var(--success); box-shadow: 0 0 15px var(--success);
+        }
+        
+        tbody tr.active-row {
+            background: rgba(0, 255, 136, 0.05);
+        }
+
+        tbody td { padding: 18px; vertical-align: middle; }
+        tbody td:first-child { 
+            border-top-left-radius: 12px; border-bottom-left-radius: 12px; font-size: 1.05rem; width: 35%;
+            color: #ccc;
+        }
+        tbody td:nth-child(2) { font-weight: 400; font-size: 1.05rem; width: 50%; }
+        tbody td:last-child { border-top-right-radius: 12px; border-bottom-right-radius: 12px; text-align: right; width: 15%; }
+
+        .roll-badge { color: #00f0ff; font-weight: 800; margin-right: 10px; opacity: 0.8; }
+
+        /* Beautiful Tick Box */
+        .custom-checkbox {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 32px; height: 32px; border-radius: 8px;
+            background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: transparent; font-size: 1rem;
+        }
+        
+        .active-row .custom-checkbox {
+            background: var(--success); border-color: var(--success);
+            color: var(--bg-dark); box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+            transform: scale(1.1);
+        }
+
+        .empty-state { text-align: center; padding: 40px; color: var(--text-muted); }
+
+        /* Save Modal Export */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 100;
+            align-items: center; justify-content: center;
+        }
+        .modal-content {
+            background: var(--bg-dark); border: 1px solid var(--glass-border); border-radius: 20px;
+            padding: 40px; max-width: 600px; width: 90%; text-align: center;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.5), 0 0 30px rgba(0,240,255,0.2);
+            animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        .modal h2 { font-size: 2rem; color: var(--success); margin-bottom: 10px; }
+        .modal p { color: var(--text-muted); margin-bottom: 20px; font-size: 1.1rem;}
+        
+        .modal-output-box {
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; padding: 25px; font-size: 1.4rem; color: #00f0ff;
+            word-wrap: break-word; margin-bottom: 30px; line-height: 1.6; user-select: text; font-weight: 600;
+        }
+
+        .btn-copy {
+            padding: 12px 30px; background: rgba(255,255,255,0.1); border: none; border-radius: 10px;
+            color: white; font-family: var(--font-family); font-size: 1rem; cursor: pointer; transition: 0.3s;
+            margin-right: 10px; display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-copy:hover { background: rgba(255,255,255,0.2); }
+        .btn-close {
+            padding: 12px 30px; background: transparent; border: 1px solid rgba(255,255,255,0.2); border-radius: 10px;
+            color: var(--text-muted); font-family: var(--font-family); font-size: 1rem; cursor: pointer; transition: 0.3s;
+        }
+        .btn-close:hover { background: rgba(255,255,255,0.1); color: white; }
+
+        @media (max-width: 768px) {
+            .controls { flex-direction: column; align-items: stretch; }
+            h1 { font-size: 2.2rem; }
+            p.subtitle { font-size: 1rem; }
+            tbody td:nth-child(2) { max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        }
+
+        /* Advanced Aesthetic Success Page */
+        .success-page {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: rgba(7, 7, 10, 0.95); z-index: 999; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; opacity: 0; pointer-events: none;
+            backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1); transform: scale(1.1);
+        }
+        .success-page.active {
+            opacity: 1; pointer-events: all; transform: scale(1);
+        }
+        
+        .success-content { 
+            text-align: center; max-width: 600px; padding: 40px; z-index: 10;
+        }
+
+        /* Staggered entry animation styles */
+        .success-element {
+            opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .success-page.active .delay-1 { transition-delay: 0.6s; opacity: 1; transform: translateY(0); }
+        .success-page.active .delay-2 { transition-delay: 0.9s; opacity: 1; transform: translateY(0); }
+        .success-page.active .delay-3 { transition-delay: 1.2s; opacity: 1; transform: translateY(0); }
+        .success-page.active .delay-4 { transition-delay: 1.5s; opacity: 1; transform: translateY(0); }
+
+        .success-icon {
+            font-size: 7rem; color: var(--success); margin-bottom: 25px;
+            animation: floatIcon 4s ease-in-out infinite alternate; text-shadow: 0 0 60px rgba(0, 255, 136, 0.6);
+        }
+        @keyframes floatIcon {
+            0% { transform: translateY(0) scale(1); text-shadow: 0 0 40px rgba(0, 255, 136, 0.5); }
+            100% { transform: translateY(-15px) scale(1.05); text-shadow: 0 0 80px rgba(0, 255, 136, 0.9); }
+        }
+        
+        .success-title {
+            font-size: 4.5rem; font-weight: 800; text-transform: uppercase; letter-spacing: 5px;
+            background: linear-gradient(to right, #00ff88 0%, #00f0ff 50%, #00ff88 100%); background-size: 200% auto;
+            background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 20px; animation: shineText 5s linear infinite;
+        }
+        @keyframes shineText { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+        
+        .success-message { font-size: 1.4rem; color: #a1a1aa; line-height: 1.7; margin-bottom: 50px; font-weight: 300; }
+        
+        .btn-return {
+            padding: 18px 45px; background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.4);
+            border-radius: 50px; color: var(--success); font-weight: 600; font-size: 1.1rem;
+            font-family: var(--font-family); cursor: pointer; transition: all 0.4s ease;
+            text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+            position: relative; overflow: hidden;
+        }
+        .btn-return::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        .btn-return:hover::before { left: 100%; }
+        .btn-return:hover {
+            background: rgba(0, 255, 136, 0.15); color: #fff; transform: translateY(-4px);
+            border-color: var(--success); box-shadow: 0 10px 40px rgba(0, 255, 136, 0.4);
+        }
+        
+        /* Advanced Particles */
+        .particle {
+            position: absolute; border-radius: 50%; opacity: 0;
+            animation: floatUp 6s ease-in infinite; pointer-events: none; z-index: 1;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            30% { opacity: 0.8; }
+            70% { opacity: 0.8; }
+            100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+
+    <div class="container fade-in">
+        <header>
+            <h1>Parul University</h1>
+            <p class="subtitle">B.SC(IT) Semester 2 Div B</p>
+        </header>
+
+        <div class="glass-panel controls">
+            <div class="search-area">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search Name or Enrollment No...">
+                <i class="fas fa-search"></i>
+            </div>
+            <button class="btn-save" id="saveBtn"><i class="fas fa-file-export"></i> Save Attendance</button>
+        </div>
+
+        <div class="glass-panel">
+            <div class="stats-bar">
+                <div class="stat-item">Total Students: <span id="totalStudents">0</span></div>
+                <div class="stat-item active-stat">Present: <span id="presentStudents">0</span></div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Enrollment No.</th>
+                        <th>Student Name</th>
+                        <th style="text-align: right;">Present Target</th>
+                    </tr>
+                </thead>
+                <tbody id="attendanceTable">
+                    <!-- Dynamic Rows populated by JS -->
+                </tbody>
+            </table>
+            <div id="emptyMessage" class="empty-state" style="display: none;">
+                No students match your search criteria.
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Modal -->
+    <div class="modal" id="saveModal">
+        <div class="modal-content">
+            <h2><i class="fas fa-check-circle"></i> Attendance Saved</h2>
+            <p>Shortened Roll Numbers of Present Students:</p>
+            <div class="modal-output-box" id="saveOutput"></div>
+            <div>
+                <button class="btn-copy" id="copyBtn"><i class="fas fa-copy"></i> Copy List</button>
+                <button class="btn-close" id="closeModal">Close Window</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Aesthetic Advanced Success Overlay -->
+    <div class="success-page" id="successPage">
+        <!-- Advanced Particles Container -->
+        <div id="particles-container"></div>
+        <div class="background-orbs">
+            <div class="orb orb-1" style="background: rgba(0,255,136,0.2); width: 800px; height: 800px;"></div>
+            <div class="orb orb-2" style="background: rgba(0,240,255,0.2); width: 600px; height: 600px;"></div>
+        </div>
+        <div class="success-content">
+            <i class="fas fa-check-circle success-icon success-element delay-1"></i>
+            <h1 class="success-title success-element delay-2">Thank You</h1>
+            <p class="success-message success-element delay-3">Attendance records have been flawlessly compiled and written to your clipboard.<br>Your workspace is now perfectly synchronized.</p>
+            <button class="btn-return success-element delay-4" id="returnBtn">Return to Dashboard</button>
+        </div>
+    </div>
+
+    <script>
+        // Roster directly injected exactly as requested
+        const rosterData = [
+            {roll:1,enroll:"2505101200001",name:"ADREESH BANERJEE"},
+            {roll:2,enroll:"2505101200002",name:"AKANSHA LAL"},
+            {roll:3,enroll:"2505101200003",name:"ALIWALA KRUTARTH VIMAL"},
+            {roll:5,enroll:"2505101200005",name:"ARYAN NAKIBAHEMAD QURESHI"},
+            {roll:6,enroll:"2505101200006",name:"ATOS DHRUV PRAKASHBHAI"},
+            {roll:8,enroll:"2505101200008",name:"BARIA NILAYKUMAR VASUDEVBHAI"},
+            {roll:9,enroll:"2505101200009",name:"BHATT PRATHAM YOGESHBHAI"},
+            {roll:13,enroll:"2505101200013",name:"DEVDA JAIMEEN HITESHKUMAR"},
+            {roll:14,enroll:"2505101200014",name:"DUDHWALA TAHA IQBALBHAI"},
+            {roll:18,enroll:"2505101200018",name:"JOBANPUTRA MAHI ASHISHBHAI"},
+            {roll:23,enroll:"2505101200023",name:"LADANI DEV SANJAYBHAI"},
+            {roll:24,enroll:"2505101200024",name:"MALI SMIT MANISHKUMAR"},
+            {roll:27,enroll:"2505101200027",name:"MEMON NOMAN ABDULRAZAK"},
+            {roll:29,enroll:"2505101200029",name:"NISHA MANDAL"},
+            {roll:30,enroll:"2505101200030",name:"PALLEWATTAGE DASANYA NETHKINI"},
+            {roll:32,enroll:"2505101200032",name:"PARMAR KULDIPSINH PRAKASHKUMAR"},
+            {roll:34,enroll:"2505101200034",name:"PATEL JAIMINKUMAR GANPATSINH"},
+            {roll:36,enroll:"2505101200036",name:"PATEL PARTHKUMAR"},
+            {roll:37,enroll:"2505101200037",name:"PATEL TEJASKUMAR RAMANBHAI"},
+            {roll:38,enroll:"2505101200038",name:"PRUTHVIRAJ VIJAYSINGH GIRASE"},
+            {roll:39,enroll:"2505101200039",name:"RABARI PRIYA SHAILESHBHAI"},
+            {roll:40,enroll:"2505101200040",name:"RATHOD ANMOLBHAI BHAVESHBHAI"},
+            {roll:41,enroll:"2505101200041",name:"RIMJHEEM KUMARI"},
+            {roll:43,enroll:"2505101200043",name:"SAKINA SULTANALI SORANGWALA"},
+            {roll:45,enroll:"2505101200045",name:"SHARMA DRISHTI RANJEETKUMAR"},
+            {roll:49,enroll:"2505101200049",name:"SHREYA RAJENDRASINH SOLANKI"},
+            {roll:50,enroll:"2505101200050",name:"SINGADIYA DHVANISH JAYESHBHAI"},
+            {roll:53,enroll:"2505101200053",name:"SUBHAM SHUKLA"},
+            {roll:110,enroll:"2505101200110",name:"NAGPURE KARAN MUKESHBHAI"},
+            {roll:111,enroll:"2505101200111",name:"PATEL MOXIL GIRISHKUMAR"},
+            {roll:114,enroll:"2505101200114",name:"ARENDULA AKASH"},
+            {roll:118,enroll:"2505101200118",name:"MACHHI DHARABEN MAHESHBHAI"},
+            {roll:122,enroll:"2505101200122",name:"SUHANA SHEIKH"},
+            {roll:127,enroll:"2505101200127",name:"SINTHI SAHA"},
+            {roll:21,enroll:"2505101200021",name:"KHARPADE PRATHAM PANDURANG"},
+            {roll:22,enroll:"2505101200022",name:"KULDEEP SINGH RAJPUT"},
+            {roll:26,enroll:"2505101200026",name:"MAYANKRAJ JHA"},
+            {roll:28,enroll:"2505101200028",name:"NEEL ACHARYA"},
+            {roll:35,enroll:"2505101200035",name:"PATEL KINJAL AVINASH"},
+            {roll:42,enroll:"2505101200042",name:"SAINATH SURYAVANSHI"},
+            {roll:48,enroll:"2505101200048",name:"SHREYA MISHRA"},
+            {roll:55,enroll:"2505101200055",name:"SWAPNIL TIWARI"},
+            {roll:56,enroll:"2505101200056",name:"TAJAK MOHAMMED KALIM"},
+            {roll:58,enroll:"2505101200058",name:"VADHAVANA MAYAN HARESHBHAI"},
+            {roll:59,enroll:"2505101200059",name:"VAGHASIYA MEET RAJUBHAI"},
+            {roll:61,enroll:"2505101200061",name:"VASKA ATIK MOHAMMED ISMAIL"},
+            {roll:63,enroll:"2505101200063",name:"BHOI YUG SHITALKUMAR"},
+            {roll:64,enroll:"2505101200064",name:"CHAUDHARI MEETKUMAR"},
+            {roll:65,enroll:"2505101200065",name:"FAIRY MEHULKUMAR KAPADIA"},
+            {roll:66,enroll:"2505101200066",name:"KOUSHAL CHHIPA"},
+            {roll:67,enroll:"2505101200067",name:"PATEL KAVYA CHETANBHAI"},
+            {roll:69,enroll:"2505101200069",name:"KANGAD ABHAY"},
+            {roll:70,enroll:"2505101200070",name:"THAKOR MOHIT RAKESHBHAI"},
+            {roll:72,enroll:"2505101200072",name:"JAYMILL HITESH CHOHAN"},
+            {roll:73,enroll:"2505101200073",name:"KHANT KYAW SWAR"},
+            {roll:75,enroll:"2505101200075",name:"MAMHASINA MOHAMMAD ALTAAF"},
+            {roll:76,enroll:"2505101200076",name:"MYAT HPONE PYAE OO"},
+            {roll:78,enroll:"2505101200078",name:"RASONANDRASANA HERPHINE HAZRAT"},
+            {roll:79,enroll:"2505101200079",name:"WAI YAN KO"},
+            {roll:81,enroll:"2505101200081",name:"PANCHAL SWAYAM KULDEEP"},
+            {roll:84,enroll:"2505101200084",name:"ABIR MAJUMDER ADAR"},
+            {roll:85,enroll:"2505101200085",name:"CHAUDHARY HITEN DALJIBHAI"},
+            {roll:86,enroll:"2505101200086",name:"ELLEN TANYARADZWA SHIKU"},
+            {roll:87,enroll:"2505101200087",name:"HTOO PYAE PAING OO"},
+            {roll:90,enroll:"2505101200090",name:"MACHHI VRUNDA JAYESHKUMAR"},
+            {roll:93,enroll:"2505101200093",name:"PRAJAPTI ISHANT ALKESHBHAI"},
+            {roll:94,enroll:"2505101200094",name:"PRAJAPATI NIKHIL DILIPBHAI"},
+            {roll:96,enroll:"2505101200096",name:"THSERING WANGDI"},
+            {roll:97,enroll:"2505101200097",name:"YE LAY"},
+            {roll:98,enroll:"2505101200098",name:"KRISHNALI YOGESH PATIL"},
+            {roll:99,enroll:"2505101200099",name:"RITIK PATIDAR"},
+            {roll:100,enroll:"2505101200100",name:"YASHVI PANCHAL"},
+            {roll:102,enroll:"2505101200102",name:"CHAVDA PALAK NARESHBHAI"},
+            {roll:103,enroll:"2505101200103",name:"DHRUVI HARESHBHAI SAKARIYA"},
+            {roll:104,enroll:"2505101200104",name:"MD.MEHEDI HASSAN"},
+            {roll:106,enroll:"2505101200106",name:"RITIK TIWARI"},
+            {roll:109,enroll:"2505101200109",name:"KHUSHI DAFDA"},
+            {roll:115,enroll:"2505101200115",name:"BHARAVADIYA KETAN GOVINDBHAI"},
+            {roll:117,enroll:"2505101200117",name:"EBASSA OLOMO YVAN SAMUEL"},
+            {roll:123,enroll:"2505101200123",name:"SHAH KRISHNA HARISHKUMAR"},
+            {roll:9003,enroll:"2505101209003",name:"TRISHUL PATEL"}
+        ];
+
+        // Sort primarily by enrollment number string to ensure strict sequenced order
+        rosterData.sort((a, b) => a.enroll.localeCompare(b.enroll));
+
+        // Ensure all default to absent
+        const students = rosterData.map(s => ({ ...s, present: false }));
+
+        // Variables
+        const searchInput = document.getElementById('searchInput');
+        const tableBody = document.getElementById('attendanceTable');
+        const emptyMessage = document.getElementById('emptyMessage');
+        const totalStudentsEl = document.getElementById('totalStudents');
+        const presentStudentsEl = document.getElementById('presentStudents');
+        
+        const saveBtn = document.getElementById('saveBtn');
+        const saveModal = document.getElementById('saveModal');
+        const saveOutput = document.getElementById('saveOutput');
+        const copyBtn = document.getElementById('copyBtn');
+        const closeModal = document.getElementById('closeModal');
+
+        // Initial setup
+        renderTable();
+
+        // Search event filtering
+        searchInput.addEventListener('input', renderTable);
+
+        // Core visual update
+        function renderTable() {
+            tableBody.innerHTML = '';
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            
+            let filtered = students;
+            if (searchTerm !== '') {
+                filtered = students.filter(s => {
+                    const cleanTerm = searchTerm.replace(/^0+/, '') || searchTerm;
+                    const enrollMatch = s.enroll.toLowerCase().includes(searchTerm) || s.enroll.toLowerCase().endsWith(searchTerm);
+                    const nameMatch = s.name.toLowerCase().includes(searchTerm);
+                    const exactRollMatch = String(s.roll) === searchTerm || String(s.roll) === cleanTerm;
+                    
+                    return enrollMatch || nameMatch || exactRollMatch;
+                });
+            }
+
+            // Real-time counter logic
+            totalStudentsEl.textContent = students.length;
+            presentStudentsEl.textContent = students.filter(s => s.present).length;
+
+            if (filtered.length === 0) {
+                emptyMessage.style.display = 'block';
+            } else {
+                emptyMessage.style.display = 'none';
+                
+                filtered.forEach(student => {
+                    const tr = document.createElement('tr');
+                    if (student.present) tr.classList.add('active-row');
+                    
+                    // Allow toggling anywhere on row
+                    tr.addEventListener('click', () => {
+                        student.present = !student.present;
+                        renderTable();
+                    });
+
+                    tr.innerHTML = `
+                        <td>
+                            <span class="roll-badge">#${student.roll}</span> 
+                            ${student.enroll}
+                        </td>
+                        <td>${student.name}</td>
+                        <td style="text-align: right;">
+                            <div class="custom-checkbox">
+                                ${student.present ? '<i class="fas fa-check"></i>' : ''}
+                            </div>
+                        </td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+            }
+        }
+
+        // Export/Save Action
+        saveBtn.addEventListener('click', () => {
+            const presentRolls = students.filter(s => s.present).map(s => s.roll);
+            
+            let outputText = "";
+            if (presentRolls.length === 0) {
+                outputText = "No students are marked present.";
+            } else {
+                // Short roll string joining, e.g., "5, 50, 110"
+                outputText = presentRolls.join(', ');
+            }
+            
+            saveOutput.textContent = outputText;
+            saveModal.style.display = 'flex';
+            
+            // Reset copy button visually
+            copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy List';
+        });
+
+        // Advanced Particles Generator
+        function generateParticles() {
+            const container = document.getElementById('particles-container');
+            container.innerHTML = ''; // reset
+            for(let i=0; i<40; i++) {
+                let div = document.createElement('div');
+                div.className = 'particle';
+                let size = Math.random() * 8 + 2;
+                div.style.width = size + 'px';
+                div.style.height = size + 'px';
+                div.style.background = Math.random() > 0.5 ? '#00ff88' : '#00f0ff';
+                div.style.left = Math.random() * 100 + 'vw';
+                div.style.animationDelay = (Math.random() * 3) + 's';
+                div.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                container.appendChild(div);
+            }
+        }
+
+        // Setup Success Elements
+        const successPage = document.getElementById('successPage');
+        const returnBtn = document.getElementById('returnBtn');
+
+        // Copy Feature
+        copyBtn.addEventListener('click', () => {
+            // Give user an advanced vibe by simulating progress
+            copyBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            
+            navigator.clipboard.writeText(saveOutput.textContent).then(() => {
+                // Slower build-up for an advanced feel
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<i class="fas fa-check"></i> Compilation Complete!';
+                    
+                    // Show success screen with noticeable delay for perfectly aesthetic slow transition
+                    setTimeout(() => {
+                        saveModal.style.display = 'none'; // Ensure modal is gone
+                        generateParticles(); // Start advanced particle effects
+                        successPage.classList.add('active'); // Pop open success page
+                        copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy List'; // Reset for next time
+                    }, 1500); // Super aesthetic 1.5s delay before overlay!
+                }, 1000); // 1.0s "processing" to make it feel more robust and advanced
+            });
+        });
+
+        // Close Success Page
+        returnBtn.addEventListener('click', () => {
+            successPage.classList.remove('active');
+        });
+
+        // Modal triggers
+        closeModal.addEventListener('click', () => saveModal.style.display = 'none');
+        saveModal.addEventListener('click', (e) => {
+            if(e.target === saveModal) saveModal.style.display = 'none';
+        });
+
+    </script>
+</body>
+</html>
