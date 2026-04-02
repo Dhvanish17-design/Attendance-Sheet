@@ -80,7 +80,7 @@
         /* Controls */
         .controls { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; align-items: center; }
 
-        .search-area { position: relative; flex: 1; min-width: 300px; }
+        .search-area { position: relative; flex: 1; min-width: 200px; width: 100%; }
         .search-area i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 1.1rem; }
         
         .search-input {
@@ -107,7 +107,11 @@
         .stat-item.active-stat span { color: var(--success); }
 
         /* Table Area */
-        table { width: 100%; border-collapse: separate; border-spacing: 0 10px; }
+        .table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; }
+        .table-responsive::-webkit-scrollbar { height: 6px; }
+        .table-responsive::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); border-radius: 10px; }
+        .table-responsive::-webkit-scrollbar-thumb { background: rgba(0,240,255,0.3); border-radius: 10px; }
+        table { width: 100%; border-collapse: separate; border-spacing: 0 10px; min-width: 600px; }
         thead th { text-align: left; padding: 10px 18px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 0.9rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
         
         tbody tr {
@@ -194,10 +198,31 @@
         .btn-close:hover { background: rgba(255,255,255,0.1); color: white; }
 
         @media (max-width: 768px) {
-            .controls { flex-direction: column; align-items: stretch; }
+            .container { padding: 20px 15px; }
+            .glass-panel { padding: 20px; }
+            .controls { flex-direction: column; align-items: stretch; gap: 15px; }
+            button.btn-save { width: 100%; justify-content: center; }
             h1 { font-size: 2.2rem; }
-            p.subtitle { font-size: 1rem; }
-            tbody td:nth-child(2) { max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            p.subtitle { font-size: 0.9rem; }
+            .stats-bar { flex-direction: column; align-items: center; gap: 10px; }
+            
+            .modal-content { padding: 30px 20px; }
+            .modal h2 { font-size: 1.6rem; }
+            .modal-output-box { font-size: 1.1rem; padding: 15px; }
+            .btn-copy, .btn-close { width: 100%; margin: 0 0 10px 0; justify-content: center; }
+            
+            .success-title { font-size: 2.5rem; }
+            .success-icon { font-size: 5rem; }
+            .success-message { font-size: 1.1rem; padding: 0 15px; }
+            .btn-return { width: 100%; padding: 15px; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8rem; }
+            p.subtitle { font-size: 0.8rem; }
+            .orb-1 { width: 300px; height: 300px; top: -50px; left: -50px; }
+            .orb-2 { width: 300px; height: 300px; bottom: -50px; right: -50px; }
+            .success-title { font-size: 2rem; }
         }
 
         /* Advanced Aesthetic Success Page */
@@ -298,18 +323,20 @@
                 <div class="stat-item active-stat">Present: <span id="presentStudents">0</span></div>
             </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Enrollment No.</th>
-                        <th>Student Name</th>
-                        <th style="text-align: right;">Present Target</th>
-                    </tr>
-                </thead>
-                <tbody id="attendanceTable">
-                    <!-- Dynamic Rows populated by JS -->
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Enrollment No.</th>
+                            <th>Student Name</th>
+                            <th style="text-align: right;">Present Target</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceTable">
+                        <!-- Dynamic Rows populated by JS -->
+                    </tbody>
+                </table>
+            </div>
             <div id="emptyMessage" class="empty-state" style="display: none;">
                 No students match your search criteria.
             </div>
