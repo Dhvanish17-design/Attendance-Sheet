@@ -9,7 +9,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-<<<<<<< HEAD
             --bg-base: #0b0f19;
             --bg-panel: rgba(15, 23, 42, 0.6);
             --bg-panel-hover: rgba(30, 41, 59, 0.6);
@@ -72,28 +71,11 @@
         }
         .theme-toggle:hover { transform: scale(1.1); background: var(--bg-panel-hover); box-shadow: 0 0 15px var(--primary-glow); color: var(--primary); }
 
-=======
-            --bg-dark: #07070a;
-            --primary-glow: rgba(0, 240, 255, 0.45);
-            --secondary-glow: rgba(180, 0, 255, 0.45);
-            --glass-bg: rgba(20, 20, 28, 0.5);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --text-main: #ffffff;
-            --text-muted: #8b8b9c;
-            --success: #00ff88;
-            --font-family: 'Outfit', sans-serif;
-        }
-
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: var(--font-family);
-<<<<<<< HEAD
             background-color: var(--bg-base);
-=======
-            background-color: var(--bg-dark);
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
             color: var(--text-main);
             min-height: 100vh;
             overflow-x: hidden;
@@ -128,17 +110,10 @@
         
         h1 {
             font-size: 3rem; font-weight: 800; letter-spacing: 2px;
-<<<<<<< HEAD
             background: var(--gradient-accent); background-size: 200% auto;
             background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             text-transform: uppercase; animation: gradientMove 5s linear infinite;
             margin-bottom: 5px; text-shadow: 0 0 30px var(--primary-glow);
-=======
-            background: linear-gradient(90deg, #00f0ff, #b400ff, #00f0ff); background-size: 200% auto;
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-transform: uppercase; animation: gradientMove 5s linear infinite;
-            margin-bottom: 5px; text-shadow: 0 0 30px rgba(180, 0, 255, 0.2);
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
         }
 
         p.subtitle { color: var(--text-muted); font-size: 1.25rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
@@ -147,17 +122,10 @@
 
         /* Glass Panel */
         .glass-panel {
-<<<<<<< HEAD
             background: var(--bg-panel); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--border); border-radius: 20px; padding: 30px;
             box-shadow: var(--shadow-panel), inset 0 0 20px rgba(255,255,255,0.02);
             transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
-=======
-            background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border); border-radius: 20px; padding: 30px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255,255,255,0.02);
-            transition: transform 0.3s ease, border-color 0.3s ease;
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
         }
 
         /* Controls */
@@ -167,7 +135,6 @@
         .search-area i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 1.1rem; }
         
         .search-input {
-<<<<<<< HEAD
             width: 100%; border-radius: 12px; background: var(--input-bg); border: 1px solid var(--border);
             padding: 16px 16px 16px 50px; color: var(--text-main); font-size: 1.05rem; font-family: var(--font-family); transition: all 0.3s ease;
         }
@@ -181,36 +148,16 @@
             box-shadow: 0 0 15px var(--primary-glow); display: flex; align-items: center; gap: 10px;
         }
         button.btn-save:hover { transform: translateY(-3px); box-shadow: 0 5px 25px var(--primary-glow); }
-=======
-            width: 100%; border-radius: 12px; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 16px 16px 16px 50px; color: var(--text-main); font-size: 1.05rem; font-family: var(--font-family); transition: all 0.3s ease;
-        }
-        .search-input:focus { border-color: #00f0ff; box-shadow: 0 0 20px rgba(0, 240, 255, 0.15); outline: none; }
-        .search-input:focus ~ i { color: #00f0ff; }
-
-        button.btn-save {
-            padding: 16px 30px; background: linear-gradient(135deg, #00f0ff, #8a2be2);
-            border: none; border-radius: 12px; color: #fff; font-weight: 700; font-size: 1.05rem;
-            font-family: var(--font-family); cursor: pointer; transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3); display: flex; align-items: center; gap: 10px;
-        }
-        button.btn-save:hover { transform: translateY(-3px); box-shadow: 0 5px 25px rgba(0, 240, 255, 0.5); }
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
 
         /* Stats Bar */
         .stats-bar {
             display: flex; justify-content: space-between; padding: 12px 18px; margin-bottom: 15px;
-<<<<<<< HEAD
             background: var(--input-bg); border-radius: 12px; font-size: 1rem; color: var(--text-muted); border: 1px solid var(--border);
-=======
-            background: rgba(0,0,0,0.25); border-radius: 12px; font-size: 1rem; color: var(--text-muted); border: 1px solid rgba(255,255,255,0.03);
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
         }
         .stat-item span { color: var(--text-main); font-weight: 600; margin-left: 8px; }
         .stat-item.active-stat span { color: var(--success); }
 
         /* Table Area */
-<<<<<<< HEAD
         .table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; background: transparent; }
         .table-responsive::-webkit-scrollbar { height: 6px; }
         .table-responsive::-webkit-scrollbar-track { background: var(--input-bg); border-radius: 10px; }
@@ -220,23 +167,11 @@
         
         tbody tr {
             background: var(--table-row); transition: all 0.2s ease; cursor: pointer;
-=======
-        .table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; }
-        .table-responsive::-webkit-scrollbar { height: 6px; }
-        .table-responsive::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); border-radius: 10px; }
-        .table-responsive::-webkit-scrollbar-thumb { background: rgba(0,240,255,0.3); border-radius: 10px; }
-        table { width: 100%; border-collapse: separate; border-spacing: 0 10px; min-width: 600px; }
-        thead th { text-align: left; padding: 10px 18px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 0.9rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-        
-        tbody tr {
-            background: rgba(255, 255, 255, 0.02); transition: all 0.2s ease; cursor: pointer;
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
             position: relative; user-select: none;
         }
         
         tbody tr::before {
             content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
-<<<<<<< HEAD
             background: var(--border-highlight); transition: all 0.3s ease;
             border-top-left-radius: 12px; border-bottom-left-radius: 12px;
         }
@@ -249,61 +184,30 @@
         
         tbody tr.active-row {
             background: var(--success-bg);
-=======
-            background: rgba(255, 255, 255, 0.1); transition: all 0.3s ease;
-            border-top-left-radius: 12px; border-bottom-left-radius: 12px;
-        }
-
-        tbody tr:hover { background: rgba(255, 255, 255, 0.06); transform: scale(1.01); }
-        
-        tbody tr.active-row::before {
-            background: var(--success); box-shadow: 0 0 15px var(--success);
-        }
-        
-        tbody tr.active-row {
-            background: rgba(0, 255, 136, 0.05);
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
         }
 
         tbody td { padding: 18px; vertical-align: middle; }
         tbody td:first-child { 
             border-top-left-radius: 12px; border-bottom-left-radius: 12px; font-size: 1.05rem; width: 35%;
-<<<<<<< HEAD
             color: var(--text-muted);
         }
         tbody td:nth-child(2) { font-weight: 400; font-size: 1.05rem; width: 50%; color: var(--text-main); }
         tbody td:last-child { border-top-right-radius: 12px; border-bottom-right-radius: 12px; text-align: right; width: 15%; }
 
         .roll-badge { color: var(--primary); font-weight: 800; margin-right: 10px; opacity: 0.8; }
-=======
-            color: #ccc;
-        }
-        tbody td:nth-child(2) { font-weight: 400; font-size: 1.05rem; width: 50%; }
-        tbody td:last-child { border-top-right-radius: 12px; border-bottom-right-radius: 12px; text-align: right; width: 15%; }
-
-        .roll-badge { color: #00f0ff; font-weight: 800; margin-right: 10px; opacity: 0.8; }
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
 
         /* Beautiful Tick Box */
         .custom-checkbox {
             display: inline-flex; align-items: center; justify-content: center;
             width: 32px; height: 32px; border-radius: 8px;
-<<<<<<< HEAD
             background: var(--table-row); border: 2px solid var(--checkbox-border);
-=======
-            background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15);
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             color: transparent; font-size: 1rem;
         }
         
         .active-row .custom-checkbox {
             background: var(--success); border-color: var(--success);
-<<<<<<< HEAD
             color: var(--bg-base); box-shadow: 0 0 15px var(--success-glow);
-=======
-            color: var(--bg-dark); box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
             transform: scale(1.1);
         }
 
@@ -312,7 +216,6 @@
         /* Save Modal Export */
         .modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-<<<<<<< HEAD
             background: var(--modal-bg); backdrop-filter: blur(10px); z-index: 100;
             align-items: center; justify-content: center;
         }
@@ -320,15 +223,6 @@
             background: var(--bg-base); border: 1px solid var(--border); border-radius: 20px;
             padding: 40px; max-width: 600px; width: 90%; text-align: center;
             box-shadow: var(--shadow-modal), 0 0 30px var(--primary-glow);
-=======
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 100;
-            align-items: center; justify-content: center;
-        }
-        .modal-content {
-            background: var(--bg-dark); border: 1px solid var(--glass-border); border-radius: 20px;
-            padding: 40px; max-width: 600px; width: 90%; text-align: center;
-            box-shadow: 0 10px 50px rgba(0,0,0,0.5), 0 0 30px rgba(0,240,255,0.2);
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
             animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
@@ -337,28 +231,47 @@
         .modal p { color: var(--text-muted); margin-bottom: 20px; font-size: 1.1rem;}
         
         .modal-output-box {
-<<<<<<< HEAD
             background: var(--input-bg); border: 1px solid var(--border);
             border-radius: 12px; padding: 25px; font-size: 1.4rem; color: var(--primary);
-=======
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px; padding: 25px; font-size: 1.4rem; color: #00f0ff;
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
             word-wrap: break-word; margin-bottom: 30px; line-height: 1.6; user-select: text; font-weight: 600;
         }
 
+        /* WhatsApp Settings Form */
+        .whatsapp-settings {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; text-align: left;
+        }
+        .whatsapp-settings .input-group { display: flex; flex-direction: column; gap: 8px; }
+        .whatsapp-settings .input-group.full-width { grid-column: span 2; }
+        .whatsapp-settings label { color: var(--text-muted); font-size: 0.95rem; font-weight: 600; }
+        .wa-input {
+            width: 100%; border-radius: 12px; background: var(--input-bg); border: 1px solid var(--border);
+            padding: 12px 16px; color: var(--text-main); font-size: 1rem; font-family: var(--font-family); transition: all 0.3s ease;
+        }
+        .wa-input:focus { border-color: var(--primary); box-shadow: 0 0 15px var(--primary-glow); outline: none; }
+
+        .modal-actions {
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;
+        }
+
+        .btn-whatsapp {
+            padding: 12px 25px; background: #25D366; border: none; border-radius: 10px;
+            color: #fff; font-family: var(--font-family); font-weight: 600; font-size: 1rem; cursor: pointer; transition: 0.3s;
+            display: inline-flex; align-items: center; gap: 8px;
+            box-shadow: 0 0 15px rgba(37, 211, 102, 0.3);
+        }
+        .btn-whatsapp:hover { transform: translateY(-3px); box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5); }
+
         .btn-copy {
-<<<<<<< HEAD
             padding: 12px 30px; background: var(--table-row-hover); border: 1px solid var(--border); border-radius: 10px;
             color: var(--text-main); font-family: var(--font-family); font-size: 1rem; cursor: pointer; transition: 0.3s;
-            margin-right: 10px; display: inline-flex; align-items: center; gap: 8px;
+            display: inline-flex; align-items: center; gap: 8px;
         }
-        .btn-copy:hover { background: var(--border-highlight); }
+        .btn-copy:hover { background: var(--border-highlight); transform: translateY(-3px); }
         .btn-close {
             padding: 12px 30px; background: transparent; border: 1px solid var(--border-highlight); border-radius: 10px;
             color: var(--text-muted); font-family: var(--font-family); font-size: 1rem; cursor: pointer; transition: 0.3s;
         }
-        .btn-close:hover { background: var(--input-bg); color: var(--text-main); }
+        .btn-close:hover { background: var(--input-bg); color: var(--text-main); transform: translateY(-3px); }
 
         @media (max-width: 768px) {
             .container { padding: 15px 10px; }
@@ -391,7 +304,10 @@
             .modal-content { padding: 30px 20px; }
             .modal h2 { font-size: 1.5rem; }
             .modal-output-box { font-size: 1rem; padding: 15px; margin-bottom: 20px; }
-            .btn-copy, .btn-close { width: 100%; margin: 0 0 10px 0; justify-content: center; }
+            .whatsapp-settings { grid-template-columns: 1fr; gap: 12px; margin-bottom: 20px; }
+            .whatsapp-settings .input-group.full-width { grid-column: span 1; }
+            .modal-actions { flex-direction: column; gap: 10px; }
+            .btn-copy, .btn-close, .btn-whatsapp { width: 100%; justify-content: center; }
             
             .success-title { font-size: 2.2rem; }
             .success-icon { font-size: 4rem; }
@@ -409,55 +325,12 @@
             tbody tr { padding-left: 35px; }
             tbody td:nth-child(2) { font-size: 1.05rem; }
             .custom-checkbox { width: 28px; height: 28px; font-size: 0.9rem; }
-=======
-            padding: 12px 30px; background: rgba(255,255,255,0.1); border: none; border-radius: 10px;
-            color: white; font-family: var(--font-family); font-size: 1rem; cursor: pointer; transition: 0.3s;
-            margin-right: 10px; display: inline-flex; align-items: center; gap: 8px;
-        }
-        .btn-copy:hover { background: rgba(255,255,255,0.2); }
-        .btn-close {
-            padding: 12px 30px; background: transparent; border: 1px solid rgba(255,255,255,0.2); border-radius: 10px;
-            color: var(--text-muted); font-family: var(--font-family); font-size: 1rem; cursor: pointer; transition: 0.3s;
-        }
-        .btn-close:hover { background: rgba(255,255,255,0.1); color: white; }
-
-        @media (max-width: 768px) {
-            .container { padding: 20px 15px; }
-            .glass-panel { padding: 20px; }
-            .controls { flex-direction: column; align-items: stretch; gap: 15px; }
-            button.btn-save { width: 100%; justify-content: center; }
-            h1 { font-size: 2.2rem; }
-            p.subtitle { font-size: 0.9rem; }
-            .stats-bar { flex-direction: column; align-items: center; gap: 10px; }
-            
-            .modal-content { padding: 30px 20px; }
-            .modal h2 { font-size: 1.6rem; }
-            .modal-output-box { font-size: 1.1rem; padding: 15px; }
-            .btn-copy, .btn-close { width: 100%; margin: 0 0 10px 0; justify-content: center; }
-            
-            .success-title { font-size: 2.5rem; }
-            .success-icon { font-size: 5rem; }
-            .success-message { font-size: 1.1rem; padding: 0 15px; }
-            .btn-return { width: 100%; padding: 15px; }
-        }
-
-        @media (max-width: 480px) {
-            h1 { font-size: 1.8rem; }
-            p.subtitle { font-size: 0.8rem; }
-            .orb-1 { width: 300px; height: 300px; top: -50px; left: -50px; }
-            .orb-2 { width: 300px; height: 300px; bottom: -50px; right: -50px; }
-            .success-title { font-size: 2rem; }
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
         }
 
         /* Advanced Aesthetic Success Page */
         .success-page {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-<<<<<<< HEAD
             background: var(--modal-bg); z-index: 999; display: flex; flex-direction: column;
-=======
-            background: rgba(7, 7, 10, 0.95); z-index: 999; display: flex; flex-direction: column;
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
             align-items: center; justify-content: center; opacity: 0; pointer-events: none;
             backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px);
             transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1); transform: scale(1.1);
@@ -481,34 +354,21 @@
 
         .success-icon {
             font-size: 7rem; color: var(--success); margin-bottom: 25px;
-<<<<<<< HEAD
             animation: floatIcon 4s ease-in-out infinite alternate; text-shadow: 0 0 60px var(--success-glow);
         }
         @keyframes floatIcon {
             0% { transform: translateY(0) scale(1); text-shadow: 0 0 40px var(--success-glow); }
             100% { transform: translateY(-15px) scale(1.05); text-shadow: 0 0 80px var(--success-glow); }
-=======
-            animation: floatIcon 4s ease-in-out infinite alternate; text-shadow: 0 0 60px rgba(0, 255, 136, 0.6);
-        }
-        @keyframes floatIcon {
-            0% { transform: translateY(0) scale(1); text-shadow: 0 0 40px rgba(0, 255, 136, 0.5); }
-            100% { transform: translateY(-15px) scale(1.05); text-shadow: 0 0 80px rgba(0, 255, 136, 0.9); }
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
         }
         
         .success-title {
             font-size: 4.5rem; font-weight: 800; text-transform: uppercase; letter-spacing: 5px;
-<<<<<<< HEAD
             background: linear-gradient(to right, var(--success) 0%, var(--primary) 50%, var(--success) 100%); background-size: 200% auto;
-=======
-            background: linear-gradient(to right, #00ff88 0%, #00f0ff 50%, #00ff88 100%); background-size: 200% auto;
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
             background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             margin-bottom: 20px; animation: shineText 5s linear infinite;
         }
         @keyframes shineText { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
         
-<<<<<<< HEAD
         .success-message { font-size: 1.4rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 50px; font-weight: 300; }
         
         .btn-return {
@@ -516,35 +376,17 @@
             border-radius: 50px; color: var(--success); font-weight: 600; font-size: 1.1rem;
             font-family: var(--font-family); cursor: pointer; transition: all 0.4s ease;
             text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 0 20px var(--success-bg);
-=======
-        .success-message { font-size: 1.4rem; color: #a1a1aa; line-height: 1.7; margin-bottom: 50px; font-weight: 300; }
-        
-        .btn-return {
-            padding: 18px 45px; background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.4);
-            border-radius: 50px; color: var(--success); font-weight: 600; font-size: 1.1rem;
-            font-family: var(--font-family); cursor: pointer; transition: all 0.4s ease;
-            text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
             position: relative; overflow: hidden;
         }
         .btn-return::before {
             content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-<<<<<<< HEAD
             background: linear-gradient(90deg, transparent, var(--success-bg), transparent);
-=======
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.2), transparent);
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
             transition: left 0.5s ease;
         }
         .btn-return:hover::before { left: 100%; }
         .btn-return:hover {
-<<<<<<< HEAD
             background: var(--success); color: var(--bg-base); transform: translateY(-4px);
             border-color: var(--success); box-shadow: 0 10px 40px var(--success-glow);
-=======
-            background: rgba(0, 255, 136, 0.15); color: #fff; transform: translateY(-4px);
-            border-color: var(--success); box-shadow: 0 10px 40px rgba(0, 255, 136, 0.4);
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
         }
         
         /* Advanced Particles */
@@ -561,10 +403,7 @@
     </style>
 </head>
 <body>
-<<<<<<< HEAD
     <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme"><i class="fas fa-sun"></i></button>
-=======
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
     <div class="background-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
 
     <div class="container fade-in">
@@ -610,12 +449,39 @@
     <!-- Export Modal -->
     <div class="modal" id="saveModal">
         <div class="modal-content">
-            <h2><i class="fas fa-check-circle"></i> Attendance Saved</h2>
+            <h2><i class="fas fa-share-nodes"></i> Share Attendance</h2>
             <p>Shortened Roll Numbers of Present Students:</p>
             <div class="modal-output-box" id="saveOutput"></div>
-            <div>
-                <button class="btn-copy" id="copyBtn"><i class="fas fa-copy"></i> Copy List</button>
-                <button class="btn-close" id="closeModal">Close Window</button>
+            
+            <div class="whatsapp-settings">
+                <div class="input-group">
+                    <label>Date</label>
+                    <input type="date" id="waDate" class="wa-input">
+                </div>
+                <div class="input-group">
+                    <label>Timetable Slot (Auto-fill)</label>
+                    <select id="waLectureSelect" class="wa-input">
+                        <option value="">Custom / Select Auto-fill...</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Subject</label>
+                    <input type="text" id="waSubject" class="wa-input" placeholder="e.g., IPDC">
+                </div>
+                <div class="input-group">
+                    <label>Class Time</label>
+                    <input type="text" id="waTime" class="wa-input" placeholder="e.g., 01:15 PM To 02:10 PM">
+                </div>
+                <div class="input-group full-width">
+                    <label>Faculty Name</label>
+                    <input type="text" id="waFaculty" class="wa-input" placeholder="e.g., Bindi Ma'am">
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-whatsapp" id="whatsappBtn"><i class="fab fa-whatsapp"></i> Share on WhatsApp</button>
+                <button class="btn-copy" id="copyBtn"><i class="fas fa-copy"></i> Copy List Only</button>
+                <button class="btn-close" id="closeModal">Close</button>
             </div>
         </div>
     </div>
@@ -625,13 +491,8 @@
         <!-- Advanced Particles Container -->
         <div id="particles-container"></div>
         <div class="background-orbs">
-<<<<<<< HEAD
             <div class="orb orb-1" style="background: var(--success-glow); width: 800px; height: 800px;"></div>
             <div class="orb orb-2" style="background: var(--primary-glow); width: 600px; height: 600px;"></div>
-=======
-            <div class="orb orb-1" style="background: rgba(0,255,136,0.2); width: 800px; height: 800px;"></div>
-            <div class="orb orb-2" style="background: rgba(0,240,255,0.2); width: 600px; height: 600px;"></div>
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
         </div>
         <div class="success-content">
             <i class="fas fa-check-circle success-icon success-element delay-1"></i>
@@ -745,8 +606,106 @@
         const saveOutput = document.getElementById('saveOutput');
         const copyBtn = document.getElementById('copyBtn');
         const closeModal = document.getElementById('closeModal');
+        
+        // WhatsApp settings elements
+        const waDate = document.getElementById('waDate');
+        const waLectureSelect = document.getElementById('waLectureSelect');
+        const waSubject = document.getElementById('waSubject');
+        const waTime = document.getElementById('waTime');
+        const waFaculty = document.getElementById('waFaculty');
+        const whatsappBtn = document.getElementById('whatsappBtn');
 
-<<<<<<< HEAD
+        // Timetable Configuration (SEM 2, DIV B)
+        const timetable = {
+            "Monday": [
+                { time: "09:30 AM To 10:25 AM", subject: "Basic English", faculty: "Gopika Ma'am" },
+                { time: "10:25 AM To 11:20 AM", subject: "IPDC", faculty: "Bindi Ma'am" },
+                { time: "12:20 PM To 01:15 PM", subject: "Class Test", faculty: "" },
+                { time: "01:15 PM To 02:10 PM", subject: "SSAD", faculty: "Shikha Ma'am" },
+                { time: "02:30 PM To 04:20 PM", subject: "Data Visualization", faculty: "Payal Ma'am" }
+            ],
+            "Tuesday": [
+                { time: "01:15 PM To 02:10 PM", subject: "IPDC", faculty: "Bindi Ma'am" },
+                { time: "02:30 PM To 03:25 PM", subject: "Basic Maths", faculty: "Kirti Ma'am" }
+            ],
+            "Wednesday": [
+                { time: "12:20 PM To 02:10 PM", subject: "SSAD", faculty: "Shikha Ma'am" },
+                { time: "02:30 PM To 03:25 PM", subject: "Basic Maths", faculty: "Kirti Ma'am" },
+                { time: "03:25 PM To 04:20 PM", subject: "AI/ML", faculty: "Mehul Sir" }
+            ],
+            "Thursday": [
+                { time: "10:25 AM To 11:20 AM", subject: "AI/ML", faculty: "Mehul Sir" },
+                { time: "01:15 PM To 02:10 PM", subject: "Data Visualization", faculty: "Payal Ma'am" },
+                { time: "02:30 PM To 04:20 PM", subject: "DBMS", faculty: "Sumit Sir" }
+            ],
+            "Friday": [
+                { time: "09:30 AM To 10:25 AM", subject: "Basic English", faculty: "Gopika Ma'am" },
+                { time: "10:25 AM To 11:20 AM", subject: "Basic Maths", faculty: "Kirti Ma'am" },
+                { time: "12:20 PM To 01:15 PM", subject: "SSAD", faculty: "Shikha Ma'am" },
+                { time: "02:30 PM To 04:20 PM", subject: "AI/ML", faculty: "Mehul Sir" }
+            ],
+            "Saturday": [
+                { time: "09:30 AM To 10:25 AM", subject: "AI/ML", faculty: "Mehul Sir" },
+                { time: "10:25 AM To 11:20 AM", subject: "Basic Maths", faculty: "Kirti Ma'am" },
+                { time: "12:20 PM To 01:15 PM", subject: "DBMS", faculty: "Sumit Sir" },
+                { time: "01:15 PM To 02:10 PM", subject: "SSAD", faculty: "Shikha Ma'am" }
+            ],
+            "Sunday": []
+        };
+
+        function updateTimetableDropdown() {
+            const dateVal = new Date(waDate.value);
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const dayName = days[dateVal.getDay()];
+            
+            waLectureSelect.innerHTML = '<option value="">Custom / Select Auto-fill...</option>';
+            
+            if (timetable[dayName]) {
+                timetable[dayName].forEach((lec, index) => {
+                    const opt = document.createElement('option');
+                    opt.value = index;
+                    opt.textContent = `${lec.time} | ${lec.subject} (${lec.faculty || 'No Faculty'})`;
+                    waLectureSelect.appendChild(opt);
+                });
+            }
+        }
+
+        waLectureSelect.addEventListener('change', (e) => {
+            const dateVal = new Date(waDate.value);
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const dayName = days[dateVal.getDay()];
+            
+            if (e.target.value !== "") {
+                const lec = timetable[dayName][e.target.value];
+                waSubject.value = lec.subject;
+                waTime.value = lec.time;
+                waFaculty.value = lec.faculty;
+                
+                // Store selections to preserve custom prefs fallback
+                localStorage.setItem('waSubject', waSubject.value);
+                localStorage.setItem('waTime', waTime.value);
+                localStorage.setItem('waFaculty', waFaculty.value);
+            }
+        });
+
+        // Trigger updates when date changes
+        waDate.addEventListener('change', updateTimetableDropdown);
+
+        // Init Date
+        const today = new Date();
+        waDate.value = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+        updateTimetableDropdown();
+        
+        // Load stored prefs
+        if(localStorage.getItem('waSubject')) waSubject.value = localStorage.getItem('waSubject');
+        if(localStorage.getItem('waTime')) waTime.value = localStorage.getItem('waTime');
+        if(localStorage.getItem('waFaculty')) waFaculty.value = localStorage.getItem('waFaculty');
+
+        // Restore prefs logic inline with saves
+        waSubject.addEventListener('input', () => localStorage.setItem('waSubject', waSubject.value));
+        waTime.addEventListener('input', () => localStorage.setItem('waTime', waTime.value));
+        waFaculty.addEventListener('input', () => localStorage.setItem('waFaculty', waFaculty.value));
+
         // Theme Toggle Logic
         const themeToggleBtn = document.getElementById('themeToggle');
         const rootStr = document.documentElement;
@@ -773,8 +732,6 @@
             updateThemeIcon();
         });
 
-=======
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
         // Initial setup
         renderTable();
 
@@ -850,7 +807,8 @@
             saveModal.style.display = 'flex';
             
             // Reset copy button visually
-            copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy List';
+            copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy List Only';
+            whatsappBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Share on WhatsApp';
         });
 
         // Advanced Particles Generator
@@ -863,11 +821,7 @@
                 let size = Math.random() * 8 + 2;
                 div.style.width = size + 'px';
                 div.style.height = size + 'px';
-<<<<<<< HEAD
                 div.style.background = Math.random() > 0.5 ? 'var(--success)' : 'var(--primary)';
-=======
-                div.style.background = Math.random() > 0.5 ? '#00ff88' : '#00f0ff';
->>>>>>> 7b93043dd649f5cf1111f87e4ed72f43a340b7a8
                 div.style.left = Math.random() * 100 + 'vw';
                 div.style.animationDelay = (Math.random() * 3) + 's';
                 div.style.animationDuration = (Math.random() * 3 + 4) + 's';
@@ -894,10 +848,50 @@
                         saveModal.style.display = 'none'; // Ensure modal is gone
                         generateParticles(); // Start advanced particle effects
                         successPage.classList.add('active'); // Pop open success page
-                        copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy List'; // Reset for next time
+                        copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy List Only'; // Reset for next time
                     }, 1500); // Super aesthetic 1.5s delay before overlay!
                 }, 1000); // 1.0s "processing" to make it feel more robust and advanced
             });
+        });
+
+        // WhatsApp Share Feature
+        whatsappBtn.addEventListener('click', () => {
+            localStorage.setItem('waSubject', waSubject.value);
+            localStorage.setItem('waTime', waTime.value);
+            localStorage.setItem('waFaculty', waFaculty.value);
+
+            const dDate = waDate.value;
+            const dateObj = new Date(dDate);
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const dayName = days[dateObj.getDay()];
+
+            const dateParts = dDate.split('-');
+            // Constructing e.g. 05-04-2026 (Sunday)
+            const formattedDate = dateParts.length === 3 ? `${dateParts[2]}-${dateParts[1]}-${dateParts[0]} (${dayName})` : `${dDate} (${dayName})`;
+            
+            const subjStr = waSubject.value || '[Subject Not Provided]';
+            const timeStr = waTime.value || '[Time Not Provided]';
+            const facultyStr = waFaculty.value || '[Faculty Name]';
+            const rollsStr = saveOutput.textContent;
+            
+            const msg = `*Attendance Report*\n*Date:* ${formattedDate}\n*Time:* ${timeStr}\n*Subject:* ${subjStr}\n*Course:* B.SC(IT) Semester 2\n*Division:* Div B\n\n*Present Roll Nos:*\n${rollsStr}\n\nThank you ${facultyStr}`;
+            
+            const encodedMsg = encodeURIComponent(msg);
+            const waUrl = `https://api.whatsapp.com/send?text=${encodedMsg}`;
+            
+            whatsappBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing...';
+            
+            setTimeout(() => {
+                window.open(waUrl, '_blank');
+                whatsappBtn.innerHTML = '<i class="fas fa-check"></i> Redirecting...';
+                
+                setTimeout(() => {
+                    saveModal.style.display = 'none';
+                    generateParticles();
+                    successPage.classList.add('active');
+                    whatsappBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Share on WhatsApp';
+                }, 1000);
+            }, 600);
         });
 
         // Close Success Page
@@ -914,3 +908,4 @@
     </script>
 </body>
 </html>
+
